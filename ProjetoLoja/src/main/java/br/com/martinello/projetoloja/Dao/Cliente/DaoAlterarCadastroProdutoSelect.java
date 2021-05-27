@@ -6,7 +6,6 @@
 package br.com.martinello.projetoloja.Dao.Cliente;
 
 import br.com.martinello.controll.controll.ConnectionFactory;
-import br.com.martinello.controll.model.MetodoBuscaCliente;
 import br.com.martinello.controll.model.MetodoBuscaProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,6 +48,7 @@ public class DaoAlterarCadastroProdutoSelect {
                 buscaProduto.add(metodoBuscaProduto);
             }
             connection.close();
+            stmt.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro foi " + ex);
         }

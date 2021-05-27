@@ -19,8 +19,13 @@ public class MetodoBuscaProduto {
     private int quantidade;
     private String categoria;
     private String dataExecucao;
-
-
+    private String ultimaAlteracao;
+    
+    
+    public String getUltimaAlteracao() {
+        return ultimaAlteracao;
+    }
+    
     public int getId() {
         return id;
     }
@@ -53,6 +58,10 @@ public class MetodoBuscaProduto {
         return dataExecucao;
     }
 
+    public void setUltimaAlteracao(String ultimaAlteracao) {
+        this.ultimaAlteracao = ultimaAlteracao;
+    }
+    
     public void setId(int id) {
         this.id = id;
     }

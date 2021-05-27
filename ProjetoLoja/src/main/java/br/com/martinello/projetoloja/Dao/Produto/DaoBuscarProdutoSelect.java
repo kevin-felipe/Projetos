@@ -31,7 +31,7 @@ public class DaoBuscarProdutoSelect {
             
             try {
                 
-            stmt = connection.prepareStatement("SELECT * FROM cliente");
+            stmt = connection.prepareStatement("SELECT * FROM produto");
             rs = stmt.executeQuery();
             
             while(rs.next()){
@@ -43,6 +43,9 @@ public class DaoBuscarProdutoSelect {
                 metodoBuscaProduto.setValor(Double.parseDouble(rs.getString("valor")));
                 metodoBuscaProduto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
                 metodoBuscaProduto.setCategoria(rs.getString("categoria"));
+                metodoBuscaProduto.setDataExecucao(rs.getString("data_execucao"));
+                metodoBuscaProduto.setUltimaAlteracao(rs.getString("ultima_alteracao"));
+                
                 buscaProduto.add(metodoBuscaProduto);
             }
                connection.close();

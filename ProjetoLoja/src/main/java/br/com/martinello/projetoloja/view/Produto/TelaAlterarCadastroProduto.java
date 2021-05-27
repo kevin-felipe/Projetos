@@ -5,12 +5,19 @@
  */
 package br.com.martinello.projetoloja.view.Produto;
 
+import br.com.martinello.controll.controll.Controll;
+import br.com.martinello.controll.model.MetodoAlterarProduto;
 import br.com.martinello.controll.model.MetodoBuscaCliente;
 import br.com.martinello.controll.model.MetodoBuscaProduto;
 import br.com.martinello.projetoloja.Dao.Cliente.DaoAlterarCadastroProdutoSelect;
 import br.com.martinello.projetoloja.Dao.Cliente.DaoBuscaCliente;
 import br.com.martinello.projetoloja.Dao.Produto.DaoAlterarProduto;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,11 +55,13 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
         txtAlterarQuantidade = new javax.swing.JTextField();
         txtAlterarCategoria = new javax.swing.JComboBox<>();
         txtAlterarDescricao = new javax.swing.JTextField();
-        txtAtualizarData = new javax.swing.JFormattedTextField();
+        txtAtualizarDataFAbricacao = new javax.swing.JFormattedTextField();
         btAlterar = new javax.swing.JButton();
-        txtAlterarNome = new javax.swing.JTextField();
+        txtAtualizarNome = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtAlterarId = new javax.swing.JTextField();
+        txtAlterarId = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtdataExecucao = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         alterarTableProduto = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -78,7 +87,7 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
         txtAlterarCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Moveis", "Eletrondomesticos", "Eletronicos" }));
 
         try {
-            txtAtualizarData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtAtualizarDataFAbricacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -91,6 +100,12 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setText("Id");
+
+        txtAlterarId.setText("NULL");
+
+        jLabel9.setText("Data do Cadastro:");
+
+        txtdataExecucao.setText("NULL");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,9 +122,14 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtAlterarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAtualizarData, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAlterarId, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtAtualizarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAtualizarDataFAbricacao, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtAlterarId)
+                                        .addGap(75, 75, 75)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtdataExecucao))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -132,19 +152,22 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAlterarId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAlterarId, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtdataExecucao)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAlterarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAtualizarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAtualizarData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAtualizarDataFAbricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,19 +191,16 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
 
         alterarTableProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id_produto", "nome", "valor", "categoteria", "data_execucao", "quantidade"
+                "id_produto", "nome", "data_fabricacao", "Descricao", "valor", "quantidade", "categoria", "data_execucao"
             }
         ));
         alterarTableProduto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                alterarTableProdutoMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 alterarTableProdutoMouseClicked(evt);
             }
@@ -200,17 +220,20 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -224,58 +247,62 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addComponent(txtBuscarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        MetodoBuscaProduto metodoBuscaProduto = new MetodoBuscaProduto();
+        MetodoAlterarProduto metodoAlterarProduto = new MetodoAlterarProduto();
+        LocalDate hoje = LocalDate.now();
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Controll controll = new Controll();
 
-        metodoBuscaProduto.setNome(title);
-        metodoBuscaProduto.setDataFabricacao(title);
-        metodoBuscaProduto.setDescricao(title);
-        metodoBuscaProduto.setValor(ERROR);
-        metodoBuscaProduto.setQuantidade(WIDTH);
-        metodoBuscaProduto.setCategoria(title);
+        try {
 
-        
+            metodoAlterarProduto.setId(Integer.parseInt(txtAlterarId.getText()));
+            metodoAlterarProduto.setNome(txtAtualizarNome.getText());
+            metodoAlterarProduto.setDataFabricacao(txtAtualizarDataFAbricacao.getText());
+            metodoAlterarProduto.setDescricao(txtAlterarDescricao.getText());
+            metodoAlterarProduto.setValor(Double.parseDouble(txtAlterarValor.getText()));
+            metodoAlterarProduto.setQuantidade(Integer.parseInt(txtAlterarQuantidade.getText()));
+            metodoAlterarProduto.setCategoria(txtAlterarCategoria.getSelectedItem().toString());
+            //metodoBuscaProduto.setUltimaAlteracao(hoje.format(formatador));
 
+            controll.InsertProduto(metodoAlterarProduto);
+            dispose();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro foi " + ex);
+            ex.printStackTrace();
+        }
 
     }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void alterarTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarTableProdutoMouseClicked
-        // TODO add your handling code here:
-        if (alterarTableProduto.getSelectedRow() != -1) {
-
-            txtAlterarId.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 0).toString());
-            txtAlterarNome.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 1).toString());
-            txtAlterarQuantidade.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 1).toString());
-
-        }
-    }//GEN-LAST:event_alterarTableProdutoMouseClicked
-
-    private void alterarTableProdutoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarTableProdutoMouseReleased
-        // TODO add your handling code here:
-         if (alterarTableProduto.getSelectedRow() != -1) {
-
-            txtAlterarId.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 0).toString());
-            txtAlterarNome.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 1).toString());
-            txtAlterarQuantidade.setText(alterarTableProduto.getValueAt(alterarTableProduto.getSelectedRow(), 1).toString());
-
-        }
-    }//GEN-LAST:event_alterarTableProdutoMouseReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        tableAlterarProsurto(txtBuscarProduto.getText());
-        
+        //tabelaAlterarProduto(txtBuscarProduto.getText());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
+    private void alterarTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alterarTableProdutoMouseClicked
+        // TODO add your handling code here:
+
+        int linha = alterarTableProduto.getSelectedRow();
+
+        txtAlterarId.setText(alterarTableProduto.getValueAt(linha, 0).toString());
+        txtAtualizarNome.setText((alterarTableProduto.getValueAt(linha, 1).toString()));
+        txtAtualizarDataFAbricacao.setText(alterarTableProduto.getValueAt(linha, 2).toString());
+        txtAlterarDescricao.setText(alterarTableProduto.getValueAt(linha, 3).toString());
+        txtAlterarValor.setText(alterarTableProduto.getValueAt(linha, 4).toString());
+        txtAlterarQuantidade.setText(alterarTableProduto.getValueAt(linha, 5).toString());
+        txtdataExecucao.setText(alterarTableProduto.getValueAt(linha, 7).toString());
+
+    }//GEN-LAST:event_alterarTableProdutoMouseClicked
+
     public void tabelaAlterarProduto() throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) alterarTableProduto.getModel();
         modelo.setNumRows(0);
@@ -285,30 +312,28 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
+                p.getDataFabricacao(),
+                p.getDescricao(),
                 p.getValor(),
+                p.getQuantidade(),
                 p.getCategoria(),
-                p.getDataExecucao(),
-                p.getQuantidade(),});
+                p.getDataExecucao(),});
         }
-        
-        
-        
 
-      public void tabelaAlterarProduto(String nomeProduto) {
-        DefaultTableModel modelo = (DefaultTableModel) alterarTableProduto.getModel();
-        modelo.setNumRows(0);
-        DaoAlterarProduto pdao = new DaoAlterarProduto();
-
-        for (MetodoBuscaProduto p : pdao.daoAlterarProduto()) {
-            modelo.addRow(new Object[]{
-                p.getId(),
-                p.getNome(),
-                p.getValor(),
-                p.getCategoria(),
-                p.getDataExecucao(),
-                p.getQuantidade(),});
-        }   
-        
+//      public void tabelaselecProduro(String nomeProduto) {
+//        DefaultTableModel modelo = (DefaultTableModel) alterarTableProduto.getModel();
+//        modelo.setNumRows(0);
+//        DaoAlterarProduto pdao = new DaoAlterarProduto();
+//
+//        for (MetodoBuscaProduto p : pdao.daoAlterarProduto()) {
+//            modelo.addRow(new Object[]{
+//                p.getId(),
+//                p.getNome(),
+//                p.getValor(),
+//                p.getCategoria(),
+//                p.getDataExecucao(),
+//                p.getQuantidade(),});
+//        }   
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable alterarTableProduto;
@@ -322,15 +347,17 @@ public class TelaAlterarCadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> txtAlterarCategoria;
     private javax.swing.JTextField txtAlterarDescricao;
-    private javax.swing.JTextField txtAlterarId;
-    private javax.swing.JTextField txtAlterarNome;
+    private javax.swing.JLabel txtAlterarId;
     private javax.swing.JTextField txtAlterarQuantidade;
     private javax.swing.JTextField txtAlterarValor;
-    private javax.swing.JFormattedTextField txtAtualizarData;
+    private javax.swing.JFormattedTextField txtAtualizarDataFAbricacao;
+    private javax.swing.JTextField txtAtualizarNome;
     private javax.swing.JTextField txtBuscarProduto;
+    private javax.swing.JLabel txtdataExecucao;
     // End of variables declaration//GEN-END:variables
 }

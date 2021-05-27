@@ -40,7 +40,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -70,8 +69,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1001, Short.MAX_VALUE)
         );
-
-        jLabel1.setText("jLabel1");
 
         jMenu1.setText("Arquivo");
         jMenuBar1.add(jMenu1);
@@ -243,7 +240,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu data;
     private javax.swing.JMenu hora;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

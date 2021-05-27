@@ -118,6 +118,12 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCampoDeBuscaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCampoDeBuscaClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,6 +181,10 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
         inserir();
         dispose();
     }//GEN-LAST:event_btInserirActionPerformed
+
+    private void txtCampoDeBuscaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCampoDeBuscaClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCampoDeBuscaClienteActionPerformed
 
     public void readTable() throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaDeBuscaCliente.getModel();

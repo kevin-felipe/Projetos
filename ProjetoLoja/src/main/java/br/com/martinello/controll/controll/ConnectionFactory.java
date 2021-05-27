@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author kevin.carvalho
  */
 public class ConnectionFactory {
-    
+   
     public Connection recuperaConexao() throws SQLException { 
         return DriverManager
                 .getConnection("jdbc:mysql://localhost/CadastroLoja?", "kevin", "64100122");

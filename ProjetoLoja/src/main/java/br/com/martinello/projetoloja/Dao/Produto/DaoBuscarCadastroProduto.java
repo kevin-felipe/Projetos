@@ -6,7 +6,6 @@
 package br.com.martinello.projetoloja.Dao.Produto;
 
 import br.com.martinello.controll.controll.ConnectionFactory;
-import br.com.martinello.controll.model.MetodoBuscaCliente;
 import br.com.martinello.controll.model.MetodoBuscaProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,6 +45,7 @@ public class DaoBuscarCadastroProduto {
                 metodoBuscaProduto.setValor(Double.parseDouble(rs.getString("valor")));
                 metodoBuscaProduto.setQuantidade(Integer.parseInt(rs.getString("quantidade")));
                 metodoBuscaProduto.setDataExecucao(rs.getString("data_execucao"));
+                metodoBuscaProduto.setDataExecucao(rs.getString("ultima_alteracao"));
               
                 alterarPoduto.add(metodoBuscaProduto);
             }

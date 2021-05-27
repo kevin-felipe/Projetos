@@ -7,7 +7,6 @@ package br.com.martinello.projetoloja.Dao.Produto;
 
 import br.com.martinello.controll.controll.ConnectionFactory;
 import br.com.martinello.controll.model.MetodoBuscaProduto;
-import br.com.martinello.controll.model.MetodoProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -19,38 +18,70 @@ import javax.swing.JOptionPane;
  * @author kevin.carvalho
  */
 public class DaoAlterarProduto {
-    
-    public DaoAlterarProduto daoAlterarProduto(MetodoProduto metodoProduto) throws SQLException {
+
+    public MetodoBuscaProduto daoUpdateProduto(MetodoBuscaProduto metodoBuscaProduto) throws SQLException {
 
         try {
             ConnectionFactory factory = new ConnectionFactory();
             Connection connection = factory.recuperaConexao();
 
-            PreparedStatement stm = connection.prepareStatement("UPDATE  produto SET"
-                    + "(nome=?,data_fabricacao=?,descricao=?,valor=?,quantidade=?,"
-                    + "categoria,data_execucao=?)",
+            PreparedStatement insertNome = connection.prepareStatement("UPDATE  produto SET"
+                    + "nome ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
                     Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
-
-            stm.setString(1, metodoProduto.getNome());
-            stm.setString(2, metodoProduto.getDataFabricacao());
-            stm.setString(3, metodoProduto.getDescricao());
-            stm.setDouble(4, metodoProduto.getValor());
-            stm.setInt(5, metodoProduto.getQuantidade());
-            stm.setString(6, metodoProduto.getCategoria());
-            stm.setString(7, metodoProduto.getDataExecucao());
-
-            stm.execute();
+            insertNome.setString(1, metodoBuscaProduto.getNome());
+            insertNome.execute();
             connection.close();
+
+            PreparedStatement insertDataFab = connection.prepareStatement("UPDATE  produto SET"
+                    + "data_fabricacao ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertDataFab.setString(1, metodoBuscaProduto.getDataFabricacao());
+            insertDataFab.execute();
+            connection.close();
+
+            PreparedStatement insertDescricao = connection.prepareStatement("UPDATE  produto SET"
+                    + "descricao ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertDescricao.setString(1, metodoBuscaProduto.getDescricao());
+            insertDescricao.execute();
+            connection.close();
+
+            PreparedStatement insertValor = connection.prepareStatement("UPDATE  produto SET"
+                    + "valor ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertValor.setDouble(1, metodoBuscaProduto.getValor());
+            insertValor.execute();
+            connection.close();
+
+            PreparedStatement insertQuantidade = connection.prepareStatement("UPDATE  produto SET"
+                    + "quantidade ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertQuantidade.setInt(1, metodoBuscaProduto.getQuantidade());
+            insertQuantidade.execute();
+            connection.close();
+
+            PreparedStatement insertCategoria = connection.prepareStatement("UPDATE  produto SET"
+                    + "categoria ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertCategoria.setString(1, metodoBuscaProduto.getCategoria());
+            insertCategoria.execute();
+            connection.close();
+            
+            PreparedStatement insertData = connection.prepareStatement("UPDATE  produto SET"
+                    + "ultima_alteracao ? WHERE id_produto = " + metodoBuscaProduto.getId() + ")",
+                    Statement.RETURN_GENERATED_KEYS);//Comando de inserção de produtos no banco pelo NetBeans
+            insertData.setString(1, metodoBuscaProduto.getUltimaAlteracao());
+            insertData.execute();
+            connection.close();
+            
+            
             JOptionPane.showMessageDialog(null, "Os Dados do Produto foram ATUALIZADOS");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Os dados não foram ATUALIZADOS" + e);
         }
-        return null;
+        return metodoBuscaProduto;
 
     }
 
-    public Iterable<MetodoBuscaProduto> daoAlterarProduto(String nomeProduto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

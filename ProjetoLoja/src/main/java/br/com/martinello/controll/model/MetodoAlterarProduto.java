@@ -9,8 +9,7 @@ package br.com.martinello.controll.model;
  *
  * @author kevin.carvalho
  */
-public class MetodoProduto {
-
+public class MetodoAlterarProduto {
     private int id;
     private String nome;
     private String dataFabricacao;
@@ -21,16 +20,8 @@ public class MetodoProduto {
     private String dataExecucao;
     private String ultimaAlteracao;
 
-    public String getUltimaAlteracao() {
-        return ultimaAlteracao;
-    }
-    
     public int getId() {
         return id;
-    }
-
-    public String getDataExecucao() {
-        return dataExecucao;
     }
 
     public String getNome() {
@@ -38,7 +29,6 @@ public class MetodoProduto {
     }
 
     public String getDataFabricacao() {
-
         return dataFabricacao;
     }
 
@@ -58,22 +48,20 @@ public class MetodoProduto {
         return categoria;
     }
 
-    public void setUltimaAlteracao(String ultimaAlteracao) {
-        this.ultimaAlteracao = ultimaAlteracao;
+    public String getDataExecucao() {
+        return dataExecucao;
     }
 
-    
-    
+    public String getUltimaAlteracao() {
+        return ultimaAlteracao;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public void setDataExecucao(String dataExecucao) {
-        this.dataExecucao = dataExecucao;
     }
 
     public void setDataFabricacao(String dataFabricacao) {
@@ -96,4 +84,13 @@ public class MetodoProduto {
         this.categoria = categoria;
     }
 
+    public void setDataExecucao(String dataExecucao) {
+        this.dataExecucao = dataExecucao;
+    }
+
+    public void setUltimaAlteracao(String ultimaAlteracao) {
+        this.ultimaAlteracao = ultimaAlteracao;
+    }
+    
+    
 }
