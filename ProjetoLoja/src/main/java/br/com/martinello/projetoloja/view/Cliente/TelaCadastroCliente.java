@@ -5,7 +5,7 @@
  */
 package br.com.martinello.projetoloja.view.Cliente;
 
-import br.com.martinello.controll.controll.Controll;
+import br.com.martinello.controll.controll.Control;
 import br.com.martinello.controll.model.MetodoCliente;
 import com.github.gilbertotorrezan.viacep.se.ViaCEPClient;
 import com.github.gilbertotorrezan.viacep.shared.ViaCEPEndereco;
@@ -345,12 +345,15 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCepActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+
         try {
             MetodoCliente metodoCliente = new MetodoCliente();
             ViaCEPClient cliente = new ViaCEPClient();
-            Controll controll = new Controll();
-            ViaCEPEndereco endereco = cliente.getEndereco(txtCep.getText());
+            Control controll = new Control();
+
             LocalDate hoje = LocalDate.now();
+
+            ViaCEPEndereco endereco = cliente.getEndereco(txtCep.getText());
 
             metodoCliente.setNome(txtNome.getText());
             metodoCliente.setCpf(txtCpf.getText());
@@ -366,7 +369,7 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
             metodoCliente.setDataExecucao(hoje.format(DateTimeFormatter.ISO_DATE));
             metodoCliente.setUf(txtUf.getText());
 
-            controll.SalvarCliente(metodoCliente);
+            controll.InsertCadastroCliente(metodoCliente);
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Os dsados não foram Gravados");
@@ -388,8 +391,8 @@ public class TelaCadastroCliente extends javax.swing.JInternalFrame {
             txtUf.setText(endereco.getUf());
             txtLocalidade.setText(endereco.getLocalidade());
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "Cep Inválido");
-             this.txtCep.setText("");
+            JOptionPane.showMessageDialog(null, "Cep Inválido");
+            this.txtCep.setText("");
         }
 
 

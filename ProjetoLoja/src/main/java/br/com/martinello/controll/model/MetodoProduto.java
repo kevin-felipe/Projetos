@@ -9,13 +9,13 @@ package br.com.martinello.controll.model;
  *
  * @author kevin.carvalho
  */
-public class MetodoProduto {
+public class MetodoProduto{
 
-    private int id;
-    private String nome;
+    private int idProduto;
+    private String nomeProduto;
     private String dataFabricacao;
     private String descricao;
-    private double valor;
+    private double valorUnitario;
     private int quantidade;
     private String categoria;
     private String dataExecucao;
@@ -26,7 +26,7 @@ public class MetodoProduto {
     }
     
     public int getId() {
-        return id;
+        return idProduto;
     }
 
     public String getDataExecucao() {
@@ -34,7 +34,7 @@ public class MetodoProduto {
     }
 
     public String getNome() {
-        return nome;
+        return nomeProduto;
     }
 
     public String getDataFabricacao() {
@@ -47,7 +47,7 @@ public class MetodoProduto {
     }
 
     public double getValor() {
-        return valor;
+        return valorUnitario;
     }
 
     public int getQuantidade() {
@@ -65,11 +65,11 @@ public class MetodoProduto {
     
     
     public void setId(int id) {
-        this.id = id;
+        this.idProduto = id;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomeProduto = nome;
     }
 
     public void setDataExecucao(String dataExecucao) {
@@ -85,7 +85,7 @@ public class MetodoProduto {
     }
 
     public void setValor(double valor) {
-        this.valor = valor;
+        this.valorUnitario = valor;
     }
 
     public void setQuantidade(int quantidade) {

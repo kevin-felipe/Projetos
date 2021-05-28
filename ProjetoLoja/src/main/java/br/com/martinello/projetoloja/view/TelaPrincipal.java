@@ -7,7 +7,7 @@ package br.com.martinello.projetoloja.view;
 
 import br.com.martinello.projetoloja.view.NotaFiscal.TelaCadastroNotaFiscal;
 import br.com.martinello.projetoloja.view.Cliente.TelaCadastroCliente;
-import br.com.martinello.projetoloja.view.Produto.TelaAlterarCadastroProduto;
+import br.com.martinello.projetoloja.view.Produto.TelaAUpdateCadastroProduto;
 import br.com.martinello.projetoloja.view.Produto.TelaCadastroProduto;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -192,7 +192,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
     
         try {
-            TelaAlterarCadastroProduto telaAlterarCadastroProduto = new TelaAlterarCadastroProduto();
+            TelaAUpdateCadastroProduto telaAlterarCadastroProduto = new TelaAUpdateCadastroProduto();
             jDesktopPane1.add(telaAlterarCadastroProduto);
             telaAlterarCadastroProduto.setVisible(true);
         } catch (SQLException ex) {

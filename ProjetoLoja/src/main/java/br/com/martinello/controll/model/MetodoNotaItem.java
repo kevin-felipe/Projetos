@@ -12,68 +12,62 @@ package br.com.martinello.controll.model;
 public class MetodoNotaItem {
 
     private int idNotaItem;
-    private double valorUnitario;
-    private int idProduto;
     private int idNotaFiscal;
+    private int idProduto;
+    private double valorUnitario;
     private int quantidade;
-    private int idSaida;
-    private String produto;
-
-    public int getIdNotaItem() {
-        return idNotaItem;
-    }
-
-    public double getValorUnitario() {
-        return valorUnitario;
-    }
+    private String nomeProduto;
 
     public int getIdProduto() {
         return idProduto;
     }
 
-    public int getIdNotaFiscal() {
-        return idNotaFiscal;
+    public double getPrecoUnitario() {
+        return valorUnitario;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public int getIdSaida() {
-        return idSaida;
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+    
+    
+
+    public int getIdNotaItem() {
+        return idNotaItem;
     }
 
-    public String getProduto() {
-        return produto;
-    }
-
-    public void setIdNotaItem(int idNotaItem) {
-        this.idNotaItem = idNotaItem;
-    }
-
-    public void setValorUnitario(double valorUnitario) {
-        this.valorUnitario = valorUnitario;
+    public int getIdNotaFiscal() {
+        return idNotaFiscal;
     }
 
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
 
-    public void setIdNotaFiscal(int idNotaFiscal) {
-        this.idNotaFiscal = idNotaFiscal;
+    public void setPrecoUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
-    public void setIdSaida(int idSaida) {
-        this.idSaida = idSaida;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    
+
+    public void setIdNotaItem(int idNotaItem) {
+        this.idNotaItem = idNotaItem;
     }
-    
-    
+
+    public void setIdNotaFiscal(int idNotaFiscal) {
+        this.idNotaFiscal = idNotaFiscal;
+    }
+
 }

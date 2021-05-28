@@ -5,6 +5,10 @@
  */
 package br.com.martinello.projetoloja.view.NotaFiscal;
 
+import br.com.martinello.controll.controll.Control;
+import br.com.martinello.controll.model.MetodoNotaItem;
+import br.com.martinello.projetoloja.Dao.NotaItem.DaoInsertNF;
+import br.com.martinello.projetoloja.Dao.NotaItem.DaoSelectNF;
 import br.com.martinello.projetoloja.view.Cliente.TelaBuscaCliente;
 import br.com.martinello.projetoloja.view.Produto.TelaBuscaProduto;
 import java.awt.event.ActionEvent;
@@ -17,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,8 +32,9 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
     /**
      * Creates new form TelaCadastroNotaFiscal
      */
-    public TelaCadastroNotaFiscal() {
+    public TelaCadastroNotaFiscal() throws SQLException {
         initComponents();
+        tabelaNotaItens();
     }
 
     /**
@@ -46,9 +52,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
         dataNotaFiscal = new javax.swing.JLabel();
         horaNotaFiscal = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
+        txtIdNotaFiscal = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -89,7 +93,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaNotaItem = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
@@ -128,12 +132,9 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
         jLabel15.setFont(new java.awt.Font("Waree", 1, 14)); // NOI18N
         jLabel15.setText("N°Nota Fiscal");
 
-        jLabel20.setFont(new java.awt.Font("Waree", 1, 14)); // NOI18N
-        jLabel20.setText("Empresa");
-
-        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+        txtIdNotaFiscal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField19ActionPerformed(evt);
+                txtIdNotaFiscalActionPerformed(evt);
             }
         });
 
@@ -145,11 +146,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dataNotaFiscal, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -163,9 +160,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(jLabel20)
-                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtIdNotaFiscal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(dataNotaFiscal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -303,9 +298,9 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCelularCliente))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCelularCliente, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -426,9 +421,9 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtNomeProduto))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -453,13 +448,13 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
 
         jButton3.setText("Salvar");
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Total"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Valor Total"));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
+            .addGap(0, 84, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -479,20 +474,33 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
             .addGap(0, 26, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaNotaItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id_produto", "produto", "id_nota_item", "valor_unitario", "quantidade"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabelaNotaItem);
 
         jButton4.setText("Inserir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -515,19 +523,19 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
                                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,14 +544,14 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 19, Short.MAX_VALUE)
+                .addGap(18, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jDesktopPane2.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -567,7 +575,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+            .addComponent(jDesktopPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
         );
 
         pack();
@@ -611,20 +619,59 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameOpened
 
-    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+    private void txtIdNotaFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdNotaFiscalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField19ActionPerformed
+    }//GEN-LAST:event_txtIdNotaFiscalActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            // TODO add your handling code here:
-            TelaBuscaProduto telaBuscaProduto= new TelaBuscaProduto(txtNomeProduto,txtQuantidadeProduto,txtCategoriaProduto,txtDataCadastroProduto,txtValorProduto,txtIdProduto);
+
+            Control control = new Control();
+            MetodoNotaItem metodoNotaItem = new MetodoNotaItem();
+
+            TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(txtNomeProduto, txtQuantidadeProduto, txtCategoriaProduto,
+                     txtDataCadastroProduto, txtValorProduto, txtIdProduto);
             jDesktopPane2.add(telaBuscaProduto);
             telaBuscaProduto.setVisible(true);
+
+            metodoNotaItem.setPrecoUnitario(Double.parseDouble(txtValorProduto.getText()));
+            metodoNotaItem.setIdNotaFiscal(Integer.parseInt(txtIdProduto.getText()));
+            metodoNotaItem.setIdNotaFiscal(Integer.parseInt(txtIdNotaFiscal.getText()));
+            metodoNotaItem.setQuantidade(Integer.parseInt(txtQuantidadeProduto.getText()));
+            metodoNotaItem.setNomeProduto(txtNomeProduto.getText());
+            control.insertNotaItem(metodoNotaItem);
+
         } catch (SQLException ex) {
             Logger.getLogger(TelaCadastroNotaFiscal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        DaoInsertNF daoInsertNF = new DaoInsertNF();
+
+        tabelaNotaItens();
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void tabelaNotaItens() throws SQLException {
+        DefaultTableModel modelo = (DefaultTableModel) tabelaNotaItem.getModel();
+        modelo.setNumRows(0);
+        DaoSelectNF pdao = new DaoSelectNF();
+
+        for (MetodoNotaItem p : pdao.carregarTableItensNF()) {
+            modelo.addRow(new Object[]{
+                p.getIdNotaItem(),
+                p.getPrecoUnitario(),
+                p.getIdProduto(),
+                p.getIdNotaFiscal(),
+                p.getQuantidade(),
+                p.getNomeProduto()
+            });
+        }
+//
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -645,7 +692,6 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -660,9 +706,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTable tabelaNotaItem;
     private javax.swing.JLabel txtBairroCliente;
     private javax.swing.JLabel txtCPFCliente;
     private javax.swing.JLabel txtCategoriaProduto;
@@ -671,6 +715,7 @@ public class TelaCadastroNotaFiscal extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtComplementoCliente;
     private javax.swing.JLabel txtDataCadastroProduto;
     private javax.swing.JLabel txtEmailCliente;
+    private javax.swing.JTextField txtIdNotaFiscal;
     private javax.swing.JLabel txtIdProduto;
     private javax.swing.JLabel txtLocalidadeCliente;
     private javax.swing.JLabel txtLogradouroCliente;

@@ -6,8 +6,8 @@
 package br.com.martinello.projetoloja.view.Cliente;
 
 import br.com.martinello.controll.model.MetodoBuscaCliente;
-import br.com.martinello.projetoloja.Dao.Cliente.DaoBuscaCliente;
-import br.com.martinello.projetoloja.Dao.Cliente.DaoBuscaClienteSelect;
+import br.com.martinello.controll.model.MetodoBuscaCliente;
+import br.com.martinello.projetoloja.Dao.Cliente.DaoClienteSelect;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,12 +41,14 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
 
     }
 
+    
+    //Variaveis da outra tela
     public TelaBuscaCliente(JLabel txtNomeCliente, JLabel txtCPFCliente,
             JLabel txtCelularCliente, JLabel txtLocalidadeCliente, JLabel txtEmailCliente,
             JLabel txtComplementoCliente, JLabel txtBairroCliente, JLabel txtCepCliente,
             JLabel txtLogradouroCliente, JLabel txtUfCliente) throws SQLException {
         initComponents();
-        readTable();
+        abrirTabelaIniciarCliente();
 
         this.txtNomeCliente = txtNomeCliente;
         this.txtCPFCliente = txtCPFCliente;
@@ -169,7 +171,7 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
     private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
 
         try {
-            readTableForInt(txtCampoDeBuscaCliente.getText());
+            campoDeBuscaTabela(txtCampoDeBuscaCliente.getText());
         } catch (SQLException ex) {
             Logger.getLogger(TelaBuscaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -178,7 +180,7 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btBuscaActionPerformed
 
     private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
-        inserir();
+        selecionaPlenaLinha();
         dispose();
     }//GEN-LAST:event_btInserirActionPerformed
 
@@ -186,10 +188,10 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCampoDeBuscaClienteActionPerformed
 
-    public void readTable() throws SQLException {
+    public void abrirTabelaIniciarCliente() throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaDeBuscaCliente.getModel();
         modelo.setNumRows(0);
-        DaoBuscaClienteSelect pdao = new DaoBuscaClienteSelect();
+        DaoClienteSelect pdao = new DaoClienteSelect();
 
         for (MetodoBuscaCliente p : pdao.read()) {
             modelo.addRow(new Object[]{
@@ -208,12 +210,12 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
 
     }
 
-    public void readTableForInt(String nome) throws SQLException {
+    public void campoDeBuscaTabela(String nome) throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaDeBuscaCliente.getModel();
         modelo.setNumRows(0);
-        DaoBuscaCliente pdao = new DaoBuscaCliente();
+        DaoClienteSelect pdao = new DaoClienteSelect();
 
-        for (MetodoBuscaCliente p : pdao.daoBuscaCliente(nome)) {
+        for (MetodoBuscaCliente p : pdao.campoDeBuscaTabelaCliente(nome)) {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -230,7 +232,7 @@ public class TelaBuscaCliente extends javax.swing.JInternalFrame {
 
     }
 
-    public void inserir() {
+    public void selecionaPlenaLinha() {
         int linha = tabelaDeBuscaCliente.getSelectedRow();
 
         txtNomeCliente.setText((tabelaDeBuscaCliente.getValueAt(linha, 1).toString()));

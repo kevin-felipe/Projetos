@@ -6,8 +6,7 @@
 package br.com.martinello.projetoloja.view.Produto;
 
 import br.com.martinello.controll.model.MetodoBuscaProduto;
-import br.com.martinello.projetoloja.Dao.Produto.DaoBuscarCadastroProduto;
-import br.com.martinello.projetoloja.Dao.Produto.DaoBuscarProdutoSelect;
+import br.com.martinello.projetoloja.Dao.Produto.DaoSelectProduto;
 import br.com.martinello.projetoloja.view.Cliente.TelaBuscaCliente;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -160,9 +159,9 @@ public class TelaBuscaProduto extends javax.swing.JInternalFrame {
     public void readTable() throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaBuscaProduto.getModel();
         modelo.setNumRows(0);
-        DaoBuscarProdutoSelect pdao = new DaoBuscarProdutoSelect();
+        DaoSelectProduto pdao = new DaoSelectProduto();
 
-        for (MetodoBuscaProduto p : pdao.readSelectProduto()) {
+        for (MetodoBuscaProduto p : pdao.carregarTabelaIniciar()) {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
@@ -181,9 +180,9 @@ public class TelaBuscaProduto extends javax.swing.JInternalFrame {
     public void buscaProduto(String nomeProduto) throws SQLException {
         DefaultTableModel modelo = (DefaultTableModel) tabelaBuscaProduto.getModel();
         modelo.setNumRows(0);
-        DaoBuscarCadastroProduto pdao = new DaoBuscarCadastroProduto();
+        DaoSelectProduto pdao = new DaoSelectProduto();
 
-        for (MetodoBuscaProduto p : pdao.daoBuscaProduto(nomeProduto)) {
+        for (MetodoBuscaProduto p : pdao.buscaTabelaProduto(nomeProduto)) {
             modelo.addRow(new Object[]{
                 p.getId(),
                 p.getNome(),
