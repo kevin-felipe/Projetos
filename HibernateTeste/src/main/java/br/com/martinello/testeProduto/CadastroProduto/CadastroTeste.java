@@ -15,25 +15,24 @@ import javax.persistence.Persistence;
  * @author kevin.carvalho
  */
 public class CadastroTeste {
+
     public static void main(String[] args) {
         Produto produto = new Produto();
 
+        EntityManagerFactory FACTORY = Persistence
+                .createEntityManagerFactory("Produto");
         produto.setDescricao("Agua");
-        
-     EntityManagerFactory FACTORY = Persistence
-           .createEntityManagerFactory("Produto");
-   
-  EntityManager em = FACTORY.createEntityManager();
+        produto.setNome("Suco de pé de gambá");
+        produto.setPreco(100);
 
-       
-       em.getTransaction().begin();
-       em.persist(produto);
-       em.getTransaction().commit();
-       
-       em.close();
-        
-        
+        EntityManager em = FACTORY.createEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(produto);
+        em.getTransaction().commit();
+
+        em.close();
+
     }
-    
-    
+
 }

@@ -5,6 +5,7 @@
  */
 package br.com.martinello;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,18 +16,30 @@ import javax.persistence.Table;
  *
  * @author kevin.carvalho
  */
-
 @Entity
-@Table(name = "produtos")
+@Table(name = "Produto")
 public class Produto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "descricao")
     private String descricao;
+     @Column(name = "preco")
+    private double preco;
 
     public int getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getPreco() {
+        return preco;
     }
 
     public String getDescricao() {
@@ -41,11 +54,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-//    public Produto(int id, String descricao) {
-//        this.id = id;
-//        this.descricao = descricao;
-//    }
-//    
-    
-    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
 }
