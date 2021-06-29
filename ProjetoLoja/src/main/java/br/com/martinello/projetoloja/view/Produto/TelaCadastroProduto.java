@@ -45,8 +45,8 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         cobCAtegoria = new javax.swing.JComboBox<>();
-        txtValor = new javax.swing.JFormattedTextField();
         txtQuantidade = new javax.swing.JFormattedTextField();
+        txtValor = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
 
         setClosable(true);
@@ -81,8 +81,6 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        txtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-
         txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,14 +97,15 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
-                    .addComponent(txtDescricao)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cobCAtegoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 155, Short.MAX_VALUE)
-                        .addComponent(txtDataFabricacao, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                        .addComponent(txtDescricao)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cobCAtegoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 170, Short.MAX_VALUE)
+                            .addComponent(txtDataFabricacao, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -177,8 +176,7 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
             Control control = new Control();
             LocalDate hoje = LocalDate.now();
             DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
- 
- 
+
             metodoProduto.setNome(txtNome.getText());
             metodoProduto.setDataFabricacao(txtDataFabricacao.getText());
             metodoProduto.setValor(Double.parseDouble(txtValor.getText()));
@@ -186,13 +184,11 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
             metodoProduto.setCategoria(cobCAtegoria.getSelectedItem().toString());
             metodoProduto.setDescricao(txtDescricao.getText());
             metodoProduto.setDataExecucao(hoje.format(formatador));
-            
-           
-            
+
             control.InsertCadastroProduto(metodoProduto);
-            
+
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "erro tela principal"+e);
+            JOptionPane.showMessageDialog(null, "erro tela principal" + e);
         }
 
 
@@ -200,8 +196,8 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
 
     private void cobCAtegoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCAtegoriaActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_cobCAtegoriaActionPerformed
 
 
@@ -219,6 +215,6 @@ public class TelaCadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtQuantidade;
-    private javax.swing.JFormattedTextField txtValor;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

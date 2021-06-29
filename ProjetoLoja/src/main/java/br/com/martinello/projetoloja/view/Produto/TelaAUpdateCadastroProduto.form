@@ -110,9 +110,11 @@
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtAlterarCategoria" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <Component id="txtAlterarQuantidade" min="-2" pref="105" max="-2" attributes="0"/>
-                                      <Component id="txtAlterarValor" min="-2" pref="105" max="-2" attributes="0"/>
                                       <Component id="txtAlterarDescricao" min="-2" pref="328" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="txtAlterarValor" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtAlterarQuantidade" alignment="0" pref="105" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -211,8 +213,6 @@
             <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtAlterarValor">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtAlterarQuantidade">
         </Component>
         <Component class="javax.swing.JComboBox" name="txtAlterarCategoria">
@@ -266,6 +266,13 @@
         <Component class="javax.swing.JLabel" name="txtdataExecucao">
           <Properties>
             <Property name="text" type="java.lang.String" value="NULL"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="txtAlterarValor">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#0.00" subtype="-1" type="0"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

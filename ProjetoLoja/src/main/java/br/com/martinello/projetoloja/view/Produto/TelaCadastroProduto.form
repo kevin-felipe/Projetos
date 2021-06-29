@@ -73,15 +73,17 @@
                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNome" pref="319" max="32767" attributes="0"/>
-                      <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="cobCAtegoria" alignment="0" pref="155" max="32767" attributes="0"/>
-                          <Component id="txtDataFabricacao" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtQuantidade" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtValor" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtNome" pref="319" max="32767" attributes="0"/>
+                          <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="cobCAtegoria" alignment="0" pref="170" max="32767" attributes="0"/>
+                              <Component id="txtDataFabricacao" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtQuantidade" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
+                      <Component id="txtValor" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -184,19 +186,14 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtValor">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="&#xa4;#,##0.00" subtype="-1" type="4"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtQuantidade">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format format="#0" subtype="-1" type="0"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtValor">
         </Component>
       </SubComponents>
     </Container>

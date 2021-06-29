@@ -26,10 +26,10 @@ public class Control {
     DaoSelectProduto daoSelectProduto = new DaoSelectProduto();
     DaoUpdateProduto daoUpdateProduto = new DaoUpdateProduto();
     DaoClienteInsert daoClienteInsert = new DaoClienteInsert();
-    DaoInsertNF daoInsertNF  = new DaoInsertNF();
+    DaoInsertNF daoInsertNF           = new DaoInsertNF();
 
-    MetodoProduto metodoProduto = new MetodoProduto();
-    MetodoNotaItem metodoNotaItem = new MetodoNotaItem();
+    MetodoProduto metodoProduto       = new MetodoProduto();
+
 
 
     //Cliente
@@ -62,14 +62,12 @@ public class Control {
     
      //NotaItem
     //-----------------------------------------------------------------------------------------------
-    public void selectNotaIe(MetodoProduto metodoProduto) throws SQLException {
-           this.daoUpdateProduto.daoUpdateProduto(metodoProduto);
-    }
+//    public void selectNotaIe(MetodoProduto metodoProduto) throws SQLException {
+//           this.daoUpdateProduto.daoUpdateProduto(metodoProduto);
+//    }
      
         
        public void insertNotaItem(MetodoNotaItem metodoNotaItem) throws SQLException{
         this.daoInsertNF.daoNotaItem(metodoNotaItem); 
-        
-
     }
 }

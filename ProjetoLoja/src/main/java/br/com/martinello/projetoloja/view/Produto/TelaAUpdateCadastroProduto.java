@@ -45,7 +45,6 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtAlterarValor = new javax.swing.JTextField();
         txtAlterarQuantidade = new javax.swing.JTextField();
         txtAlterarCategoria = new javax.swing.JComboBox<>();
         txtAlterarDescricao = new javax.swing.JTextField();
@@ -56,6 +55,7 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
         txtAlterarId = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtdataExecucao = new javax.swing.JLabel();
+        txtAlterarValor = new javax.swing.JFormattedTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableAlterarProduto = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -101,6 +101,8 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
 
         txtdataExecucao.setText("NULL");
 
+        txtAlterarValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,9 +135,10 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtAlterarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAlterarQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAlterarValor, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAlterarDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtAlterarDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtAlterarValor, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtAlterarQuantidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(btAlterar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -260,7 +263,7 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
             metodoProduto.setNome(txtAtualizarNome.getText());
             metodoProduto.setDataFabricacao(txtAtualizarDataFAbricacao.getText());
             metodoProduto.setDescricao(txtAlterarDescricao.getText());
-            metodoProduto.setValor(Double.parseDouble(txtAlterarValor.getText()));
+            metodoProduto.setValor(Double.valueOf(txtAlterarValor.getText()).doubleValue());
             metodoProduto.setQuantidade(Integer.parseInt(txtAlterarQuantidade.getText()));
             metodoProduto.setCategoria(txtAlterarCategoria.getSelectedItem().toString());
             metodoProduto.setUltimaAlteracao(hoje.format(formatador));
@@ -330,7 +333,7 @@ public class TelaAUpdateCadastroProduto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtAlterarDescricao;
     private javax.swing.JLabel txtAlterarId;
     private javax.swing.JTextField txtAlterarQuantidade;
-    private javax.swing.JTextField txtAlterarValor;
+    private javax.swing.JFormattedTextField txtAlterarValor;
     private javax.swing.JFormattedTextField txtAtualizarDataFAbricacao;
     private javax.swing.JTextField txtAtualizarNome;
     private javax.swing.JTextField txtBuscarProduto;

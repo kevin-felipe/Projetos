@@ -43,6 +43,12 @@ public class DaoInsertProduto {
             connection.close();
             JOptionPane.showMessageDialog(null, "Os Dados do Produto foram Gravados");
 
+//            ResultSet rst = stm.getGeneratedKeys();
+//            while (rst.next()) {
+//                Integer id = rst.getInt(1);
+//                JOptionPane.showMessageDialog(null, "A chave gerada foi" + id);
+//            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Os dados não foram Gravados" + e);
         }

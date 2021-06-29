@@ -11,12 +11,18 @@ package br.com.martinello.controll.model;
  */
 public class MetodoNotaItem {
 
-    private int idNotaItem;
-    private int idNotaFiscal;
+    private int idNotaItem = 1;
+    private int idNotaFiscal = 1;
     private int idProduto;
     private double valorUnitario;
     private int quantidade;
     private String nomeProduto;
+    private double valorTotal;
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+    
 
     public int getIdProduto() {
         return idProduto;
@@ -48,7 +54,7 @@ public class MetodoNotaItem {
         this.idProduto = idProduto;
     }
 
-    public void setPrecoUnitario(double valorUnitario) {
+    public void setValorUnitario(double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
 
@@ -67,7 +73,15 @@ public class MetodoNotaItem {
     }
 
     public void setIdNotaFiscal(int idNotaFiscal) {
-        this.idNotaFiscal = idNotaFiscal;
+        this.idNotaFiscal = idNotaFiscal ;
     }
 
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+
+
+    
+    
 }

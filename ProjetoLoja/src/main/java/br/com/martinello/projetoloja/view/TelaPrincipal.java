@@ -7,6 +7,7 @@ package br.com.martinello.projetoloja.view;
 
 import br.com.martinello.projetoloja.view.NotaFiscal.TelaCadastroNotaFiscal;
 import br.com.martinello.projetoloja.view.Cliente.TelaCadastroCliente;
+import br.com.martinello.projetoloja.view.Cliente.TelaUpdateCadastroCliente;
 import br.com.martinello.projetoloja.view.Produto.TelaAUpdateCadastroProduto;
 import br.com.martinello.projetoloja.view.Produto.TelaCadastroProduto;
 import java.awt.event.ActionEvent;
@@ -44,6 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -82,6 +84,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItem5.setText("Alterar Cadastro");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -190,7 +200,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-    
+
         try {
             TelaAUpdateCadastroProduto telaAlterarCadastroProduto = new TelaAUpdateCadastroProduto();
             jDesktopPane1.add(telaAlterarCadastroProduto);
@@ -198,8 +208,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-       
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        TelaUpdateCadastroCliente telaAUpdateCadastroCliente = new TelaUpdateCadastroCliente();
+        jDesktopPane1.add(telaAUpdateCadastroCliente);
+        telaAUpdateCadastroCliente.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,5 +267,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }
